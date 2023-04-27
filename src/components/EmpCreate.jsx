@@ -1,3 +1,4 @@
+import Axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -16,13 +17,23 @@ const EmpCreate = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         let url = "http://localhost:4000/api/user"
-        fetch(url, {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(detail)
-        }).then((response) => response.json)
+        const body = {
+            first_name: detail.first_name,
+            last_name: detail.last_name,
+            email: detail.email,
+            phone_no: detail.phone_no,
+        }
+        Axios.post(url, body)
             .then((response) => alert("Saved Successfully"), navigate('/'))
             .catch((error) => { console.log(error); })
+
+        // fetch(url, {
+        //     method: "POST",
+        //     headers: { "content-type": "application/json" },
+        //     body: JSON.stringify(detail)
+        // }).then((response) => response.json)
+        //     .then((response) => alert("Saved Successfully"), navigate('/'))
+        //     .catch((error) => { console.log(error); })
     }
 
     const handleCreateEmp = (e) => {

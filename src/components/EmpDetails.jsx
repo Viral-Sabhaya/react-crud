@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
@@ -11,12 +12,20 @@ const EmpDetails = () => {
 
     const fetchData = async () => {
         const url = `${'http://localhost:4000/api/user/' + empid}`
-        await fetch(url).then((response) => response.json()).
-            then((response) => {
-                setData(response.data);
+
+        await Axios.get(url)
+            .then((response) => {
+                setData(response.data.data);
             }).catch((error) => {
                 console.log("error", error);
             })
+
+        // await fetch(url).then((response) => response.json()).
+        //     then((response) => {
+        //         setData(response.data);
+        //     }).catch((error) => {
+        //         console.log("error", error);
+        //     })
     }
     return (
         <>

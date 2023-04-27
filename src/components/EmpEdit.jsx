@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
@@ -16,13 +17,18 @@ const EmpEdit = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const url = `${'http://localhost:4000/api/user/'}`
-        fetch(url, {
-            method: "PUT",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(detail)
-        }).then((response) => response.json)
+
+        Axios.put(url, detail)
             .then((response) => alert("Saved Successfully"), navigate('/'))
             .catch((error) => { console.log(error); })
+
+        // fetch(url, {
+        //     method: "PUT",
+        //     headers: { "content-type": "application/json" },
+        //     body: JSON.stringify(detail)
+        // }).then((response) => response.json)
+        //     .then((response) => alert("Saved Successfully"), navigate('/'))
+        //     .catch((error) => { console.log(error); })
     }
 
     const handleCreateEmp = (e) => {

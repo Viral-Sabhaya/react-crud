@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -25,11 +26,14 @@ const EmpListing = () => {
     const loadRemove = (id) => {
         if (window.confirm('Do you want to delete data!!')) {
             const url = `${'http://localhost:4000/api/user/' + id}`
-            fetch(url, {
-                method: "DELETE"
-            }).then((response) => response.json)
+            Axios.delete(url)
                 .then((response) => alert("Remove Successfully"), window.location.reload())
                 .catch((error) => { console.log(error); })
+            // fetch(url, {
+            //     method: "DELETE"
+            // }).then((response) => response.json)
+            //     .then((response) => alert("Remove Successfully"), window.location.reload())
+            //     .catch((error) => { console.log(error); })
         }
     }
 
